@@ -32,7 +32,8 @@ module.exports = {
             SELECT cities.city_id, cities.name, cities.rating, 
             countries.country_id, countries.name 
             FROM cities JOIN countries
-            ON cities.country_id = countries.country_id;
+            ON cities.country_id = countries.country_id
+            ORDER BY rating DESC;
         `
         sequelize.query(query)
         .then((dbRes) => {
@@ -71,6 +72,11 @@ module.exports = {
                 rating INTEGER,
                 country_id INTEGER REFERENCES countries(country_id)
             );
+
+            insert into cities (city_id, name, rating, country_id)
+            values (1,'New York',3,187),
+            values (2,'Los Angeles',5,187),
+            values (3,'San Francisco',4,187);
 
             insert into countries (name)
             values ('Afghanistan'),
